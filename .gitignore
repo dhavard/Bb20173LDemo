@@ -8,6 +8,7 @@
 *.user
 *.userosscache
 *.sln.docstates
+bbworlddemo.conf
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
