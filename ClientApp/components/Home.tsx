@@ -7,10 +7,26 @@ export default class Home extends React.Component<RouteComponentProps<{}>, {}> {
             <div className="bd-pageheader">
                 <div className="container text-center">
                     <h1>Hello, BbWorld!</h1>
-                    <p className="lead">This application was made as a presentation for BbWorld 2017</p>
+                    <p className="lead">This application was made as a presentation for BbWorld 2017 and is for demostration purposes only</p>
+                    <hr className="my-4"/>
+                    <p className="small"><em>Source code hosted at <a href='https://github.com/dhavard/Bb20173LDemo'>GitHub</a></em></p>
                 </div>
             </div>
             <div className="container">
+                <div className="card card-primary mb-3">
+                    <div className="card-block">
+                        <blockquote className="card-blockquote">
+                            <p className="lead">This project created using a template and resources:</p>
+                            <ul>
+                                <li><a href='https://github.com/aspnet/JavaScriptServices/'>Blackboard Developer Platform</a> for Blackboard REST API documentation and registration</li>
+                                <li><a href='https://github.com/aspnet/JavaScriptServices/'>JavaScriptServices</a> for project template</li>
+                                <li><a href='https://medium.com/@MaartenSikkema/using-react-redux-and-webpack-with-dotnet-core-to-build-a-modern-web-frontend-7e2d091b3ba'>Maarten Sikkema</a> and his informative article</li>
+                                <li><a href='https://docs.microsoft.com/en-us/dotnet/csharp/tutorials/console-webapiclient'>C# Tutorials</a> provided by Microsoft documentation</li>
+                                <li><a href='https://v4-alpha.getbootstrap.com/'>Bootstrap</a> tutorials and component library</li>
+                            </ul>
+                        </blockquote>
+                    </div>
+                </div>
                 <div className="card card-primary mb-3">
                     <div className="card-block">
                         <blockquote className="card-blockquote">

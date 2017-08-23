@@ -1,6 +1,7 @@
 import { fetch, addTask } from 'domain-task';
 import { Action, Reducer, ActionCreator } from 'redux';
 import { AppThunkAction } from './';
+import { LearnResponse } from './LearnResponse'
 
 // -----------------
 // STATE - This defines the type of data maintained in the Redux store.
@@ -31,14 +32,26 @@ interface RequestTokenAction {
     refreshToken: string
 }
 
-interface ReceiveTokenAction {
+export interface ReceiveTokenAction {
     type: 'RECEIVE_TOKEN',
     token: Token
 }
 
+interface RequestCodeAction {
+    type: 'REQUEST_CODE',
+    grantType: string,
+    code: string,
+    redirectUri: string
+}
+
+interface ReceiveCodeAction {
+    type: 'RECEIVE_CODE',
+    learnResponse: LearnResponse
+}
+
 // Declare a 'discriminated union' type. This guarantees that all references to 'type' properties contain one of the
 // declared type strings (and not any other arbitrary string).
-type KnownAction = RequestTokenAction | ReceiveTokenAction;
+type KnownAction = RequestTokenAction | ReceiveTokenAction | RequestCodeAction | ReceiveCodeAction;
 
 // ----------------
 // ACTION CREATORS - These are functions exposed to UI components that will trigger a state transition.
@@ -56,6 +69,27 @@ export const actionCreators = {
 
             addTask(fetchTask); // Ensure server-side prerendering waits for this to complete
             dispatch({ type: 'REQUEST_TOKEN', grantType: grantType, code: code, redirectUri: 'http://localhost:5000/token', refreshToken: refreshToken });
+        //}
+    },
+    requestCode: (grantType: string, code: string, refreshToken: string): AppThunkAction<KnownAction> => (dispatch, getState) => {
+        // Only load data if it's something we don't already have (and are not already loading)
+        //if (!getState().token.isLoading) {
+            let fetchTask = fetch(`/api/token/getCode?grantType=${ grantType }&code=${ code }&refreshToken=${ refreshToken }`)
+                .then(response => response.json() as Promise<LearnResponse>)
+                .then(data => {
+                    dispatch({ type: 'RECEIVE_CODE', learnResponse: data });
+                    if( data.statusCode == "200" ) {
+                        //console.log( "GET code response " + JSON.stringify(data) );
+                        var win = window.open("", "Title", "toolbar=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=400, height=450");
+                        win.location.href = data.url;
+                        win.document.body.innerHTML = data.body;
+                    } else {
+                        //console.log( "GET code response for failure" + JSON.stringify(data) );
+                    }
+                });
+
+            addTask(fetchTask); // Ensure server-side prerendering waits for this to complete
+            dispatch({ type: 'REQUEST_CODE', grantType: grantType, code: code, redirectUri: 'http://localhost:5000/token', refreshToken: refreshToken });
         //}
     }
 };

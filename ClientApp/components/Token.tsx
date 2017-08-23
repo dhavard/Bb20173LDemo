@@ -17,7 +17,7 @@ class Token extends React.Component<TokenProps, {}> {
         // This method runs when the component is first added to the page
         if( this.props.token.user_id == null ) {
             let grantType = 'grantType';
-            let code = 'code';
+            let code = '';
             let refreshToken = 'refreshToken';
             this.props.requestToken(grantType, code, refreshToken);
         }
@@ -25,9 +25,16 @@ class Token extends React.Component<TokenProps, {}> {
 
     public handleGetToken() : void {
         let grantType = 'grantType';
-        let code = 'code';
+        let code = '';
         let refreshToken = 'refreshToken';
         this.props.requestToken(grantType, code, refreshToken);
+    }
+
+    public handleGetCode() : void {
+        let grantType = 'grantType';
+        let code = '';
+        let refreshToken = 'refreshToken';
+        this.props.requestCode(grantType, code, refreshToken);
     }
 
     public render() {
@@ -85,6 +92,7 @@ class Token extends React.Component<TokenProps, {}> {
         return <p className='clearfix text-center'>
             <button className='btn btn-primary pull-right' onClick={ () => this.handleGetToken() }>Request Token</button>
             { this.props.isLoading ? <span>Loading...</span> : [] }
+            <button className='btn btn-secondary pull-right' onClick={ () => this.handleGetCode() }>Request Code</button>
         </p>;
     }
 }

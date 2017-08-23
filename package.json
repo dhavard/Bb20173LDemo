@@ -23,6 +23,7 @@
     "history": "4.6.1",
     "jquery": "3.2.1",
     "json-loader": "0.5.4",
+    "query-string": "^5.0.0",
     "node-noop": "1.0.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",

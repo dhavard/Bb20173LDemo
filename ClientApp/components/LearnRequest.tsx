@@ -27,6 +27,7 @@ class LearnRequest extends React.Component<RequestProps, {}> {
         var update = {learnRequest: { [event.target.id]: event.target.value }};
         this.setState(update);
         this.props.updateRequest(update);
+        this.handleTextArea(event.target);
     }
 
     public handleGetRequest() : void {
@@ -37,6 +38,17 @@ class LearnRequest extends React.Component<RequestProps, {}> {
         console.log( "sendRequest handler" + JSON.stringify( this.props.learnRequest, null, 2) );   
         this.props.sendRequest(this.props.learnRequest);
         this.handleGetRequest();
+    }
+
+    public handleTextArea(element: any) : void {
+        if (element.clientHeight < element.scrollHeight)
+        {
+            element.style.height = element.scrollHeight + "px";
+            if (element.clientHeight < element.scrollHeight)
+            {
+                element.style.height = (element.scrollHeight * 1.1 - element.clientHeight) + "px";
+            }
+        }
     }
 
     public render() {
@@ -79,7 +91,7 @@ class LearnRequest extends React.Component<RequestProps, {}> {
         return <div>
             <h2>Body</h2>
             <div className="form-group">
-                <textarea id="body" className="form-control json-input" onChange={ e => this.handleRequestUpdate(e)} defaultValue={ this.props.learnRequest.body }/>
+                <textarea id="body" className="form-control json-input md-textarea" onChange={ e => this.handleRequestUpdate(e)} defaultValue={ this.props.learnRequest.body }/>
             </div>
         </div>;
     }

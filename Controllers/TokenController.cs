@@ -14,8 +14,14 @@ namespace WebApplicationBasic.Controllers
         [HttpGet("[action]")]
         public Token GetToken(string grantType, string code, string redirectUri)
         {
-            Token result = LearnClient.RequestToken().Result;
+            Token result = LearnClient.RequestToken(code).Result;
             return Token.TOKEN;
+        }
+
+        [HttpGet("[action]")]
+        public ResponseCache GetCode()
+        {
+            return LearnClient.RequestCode().Result;
         }
     }
 }
