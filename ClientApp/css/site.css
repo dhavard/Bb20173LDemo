@@ -1,3 +1,7 @@
+textarea.md-textarea {
+    min-height: 20em;
+}
+
 .card-block {
     max-width: 80%;
 }

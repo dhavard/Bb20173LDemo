@@ -52,7 +52,7 @@ export const actionCreators = {
             || learnRequest.body !== getState().learnRequest.learnRequest.body
             || learnRequest.method !== getState().learnRequest.learnRequest.method
             || learnRequest.url !== getState().learnRequest.learnRequest.url) {
-            console.log( "updateRequest action" + JSON.stringify( learnRequest, null, 2) );
+            //console.log( "updateRequest action" + JSON.stringify( learnRequest, null, 2) );
                
             dispatch({ 
                 type: 'UPDATE_REQUEST', 
@@ -61,7 +61,7 @@ export const actionCreators = {
         }
     },
     sendRequest: (learnRequest: any): AppThunkAction<RouterAction> => (dispatch, getState) => {   
-        console.log( "sendRequest action" + JSON.stringify( learnRequest, null, 2) );   
+        //console.log( "sendRequest action" + JSON.stringify( learnRequest, null, 2) );   
         let fetchTask = fetch(`/api/resource/requestResource`, {
             method: 'POST',
             headers: {
@@ -98,9 +98,9 @@ const unloadedState: LearnRequestState = { learnRequest: {
 export const reducer: Reducer<LearnRequestState> = (state: LearnRequestState, action: any) => {
     switch (action.type) {
         case 'UPDATE_REQUEST':
-            console.log( "updateRequest reducer" + JSON.stringify( action, null, 2) );
+            //console.log( "updateRequest reducer" + JSON.stringify( action, null, 2) );
         case 'GET_REQUEST':
-            console.log( "getRequest reducer" );
+            //console.log( "getRequest reducer" );
             if( action.learnRequest )
             {
                 return { learnRequest: {

@@ -68,14 +68,6 @@ class Config extends React.Component<ConfigProps, {}> {
     }
 }
 
-/*
-
-    tokenType: string;
-    redirectUri: string;
-    scope: string;
-    state: string;
-*/
-
 // Wire up the React component to the Redux store
 export default connect(
     (state: ApplicationState) => state.config, // Selects which state properties are merged into the component's props
